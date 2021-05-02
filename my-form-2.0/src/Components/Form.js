@@ -1,10 +1,15 @@
 import { Component } from "react";
+import PersonalInfo   from './PersonalInfo';
+import OfficeInfo from './OfficeInfo';
 
 class Form extends Component {
   constructor() {
     super()
     this.handleChange = this.handleChange.bind(this);
     this.handleRadioButtons = this.handleRadioButtons.bind(this);
+    this.handleStates = this.handleStates.bind(this);
+    this.handleOnBlur = this.handleOnBlur.bind(this);
+    this.handleOnMouseEnter = this.handleOnMouseEnter.bind(this);
 
     this.state = {
       name: '',
@@ -12,7 +17,12 @@ class Form extends Component {
       cpf: '',
       address: '',
       city: '',
-      selectOption: "",
+      selectOption: '',
+      myState:'',
+      curriculumSummary:'',
+      officePosition:'',
+      officeDescription:'',
+      setAlert: false,
     }
   }
 
@@ -23,6 +33,9 @@ class Form extends Component {
     if (name === "cpf" && value.length > 11) return;
     if (name === "address" && value.length > 200) return;
     if (name === "city" && value.length > 28) return;
+    if (name === "curriculumSummary" && value.length > 1000) return;
+    if (name === "officePosition" && value.length > 40) return;
+    if (name === "officeDescription" && value.length > 500) return;
 
     this.setState({
       [name]: value.toUpperCase(),
@@ -35,25 +48,49 @@ class Form extends Component {
     })
   }
 
+  handleStates(event) {
+    this.setState({
+      myState: event.target.value
+    })
+  }
+
+  handleOnBlur(event) {
+    if (parseInt(event.target.value[0]) >= 0 
+    && parseInt(event.target.value[0]) <=9 ) {
+      this.setState({
+        city: '',
+      })
+    }
+  }
+
+  handleOnMouseEnter() {
+    if (this.state.setAlert === false) {
+      window.alert('Preencha com cuidado esta informação!');
+      this.setState({
+        setAlert: true,
+      })
+    } 
+  }
+
   render() {
      return(
-      <fieldset>
-          <label>Name: </label>
-          <input name="name" value={this.state.name} onChange={this.handleChange} required />
-          <label>  E-mail: </label>
-          <input name="email" type="email" value={this.state.email} onChange={this.handleChange} required />
-          <label>  CPF: </label>
-          <input name="cpf" value={this.state.cpf} onChange={this.handleChange} required />
-          <label>  Endereço: </label>
-          <input name="address" value={this.state.address} onChange={this.handleChange} required />
-          <label>  Cidade: </label>
-          <input name="city" value={this.state.city} onChange={this.handleChange} required />
-          <label>Tipo</label>
-          <input name="typeHouse" type="radio" value="apartamento" checked={this.state.selectOption === "apartamento"} onChange={this.handleRadioButtons} />Apartamento
-          <input name="typeHouse" type="radio" value="casa" checked={this.state.selectOption === "casa"} onChange={this.handleRadioButtons} />Casa
-           
-        </fieldset>
+      <div>
+        <PersonalInfo 
+          state={this.state} 
+          handleRadioButtons={this.handleRadioButtons} 
+          handleChange={this.handleChange} 
+          handleStates={this.handleStates} 
+          handleOnBlur={this.handleOnBlur}
+        />
+        <OfficeInfo
+          state={this.state} 
+          handleChange={this.handleChange} 
+          handleOnMouseEnter={this.handleOnMouseEnter} 
+        />
+      </div>
+      
      ) 
+     
   }
 }
 
