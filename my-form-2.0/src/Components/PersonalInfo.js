@@ -4,7 +4,6 @@ import States from './BuildState';
 
 class PersonalInfo extends Component {
   render() {
-
     const { 
       state, 
       handleRadioButtons, 
@@ -15,14 +14,18 @@ class PersonalInfo extends Component {
 
     return(
         <fieldset>
-          <label>Name: </label>
+          <legend>Informações pessoais</legend>
+          <label>
+            Nome: 
           <input 
             name="name" 
             value={state.name} 
             onChange={handleChange} 
             required 
           />
-          <label>  E-mail: </label>
+          </label>
+          <label>
+            E-mail:
           <input 
             name="email" 
             type="email" 
@@ -30,21 +33,27 @@ class PersonalInfo extends Component {
             onChange={handleChange} 
             required 
           />
-          <label>  CPF: </label>
+          </label>
+          <label>
+            CPF:
           <input 
             name="cpf" 
             value={state.cpf} 
             onChange={handleChange} 
             required 
           />
-          <label>  Endereço: </label>
+          </label>
+          <label>
+            Endereço: 
           <input 
             name="address" 
             value={state.address} 
             onChange={handleChange} 
             required 
           />
-          <label>  Cidade: </label>
+          </label>
+          <label>
+            Cidade:
           <input 
             name="city" 
             value={state.city} 
@@ -52,14 +61,18 @@ class PersonalInfo extends Component {
             onBlur={handleOnBlur} 
             required 
           />
-          <label>Tipo</label>
+          </label>
+          <label>
+            Tipo
           <input 
             name="typeHouse" 
             type="radio" 
             value="apartamento" 
             checked={state.selectOption === "apartamento"} 
             onChange={handleRadioButtons} 
+            selected
           /> Apartamento
+          </label>
           <input 
             name="typeHouse" 
             type="radio" 

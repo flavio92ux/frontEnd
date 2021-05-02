@@ -12,6 +12,7 @@ class Form extends Component {
     this.handleOnBlur = this.handleOnBlur.bind(this);
     this.handleOnMouseEnter = this.handleOnMouseEnter.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleClear = this.handleClear.bind(this);
 
     this.state = {
       name: '',
@@ -82,7 +83,8 @@ class Form extends Component {
     } 
   }
 
-  handleClick() {
+  handleClick(event) {
+    event.preventDefault();
 
     if(this.state.name === '') return;
     if(this.state.email === '') return;
@@ -99,9 +101,26 @@ class Form extends Component {
     })
   }
 
+  handleClear() {
+    this.setState({
+      name: '',
+      email: '',
+      cpf: '',
+      address: '',
+      city: '',
+      selectOption: '',
+      myState:'Acre - AC',
+      curriculumSummary:'',
+      officePosition:'',
+      officeDescription:'',
+      setAlert: false,
+      submit: false,
+    }) 
+  }
+
   render() {
      return(
-      <div>
+      <form id="myForm" onSubmit={this.handleClick} >
         <PersonalInfo 
           state={this.state} 
           handleRadioButtons={this.handleRadioButtons} 
@@ -114,12 +133,13 @@ class Form extends Component {
           handleChange={this.handleChange} 
           handleOnMouseEnter={this.handleOnMouseEnter} 
         />
-        <button onClick={this.handleClick} >Submit</button>
+        <button type="submit" >Submit</button>
+        <input type="reset" onclick={this.handleClear} value="Reset" />
         { this.state.submit ? <RenderInfo state={this.state} /> : '' }
-      </div>
-      
-     ) 
-     
+        
+        
+      </form>    
+     )      
   }
 }
 

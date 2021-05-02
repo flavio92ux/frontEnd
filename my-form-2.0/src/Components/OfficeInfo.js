@@ -6,6 +6,7 @@ class OfficeInfo extends Component {
     const { state, handleChange, handleOnMouseEnter } = this.props;
     return (
       <fieldset>
+          <legend>Informações profissionais</legend>
           <label>Resumo do currículo: </label>
           <textarea 
             placeholder="resumo do currículo" 

@@ -12,7 +12,7 @@ class RenderInfo extends Component {
       myState, 
       curriculumSummary, 
       officePosition, 
-      officeDescription 
+      officeDescription, 
     } = this.props.state;
 
     return (
