@@ -5,7 +5,13 @@ import States from './BuildState';
 class PersonalInfo extends Component {
   render() {
 
-    const { state, handleRadioButtons, handleChange, handleStates, handleOnBlur } = this.props;
+    const { 
+      state, 
+      handleRadioButtons, 
+      handleChange, 
+      handleStates, 
+      handleOnBlur 
+    } = this.props;
 
     return(
         <fieldset>

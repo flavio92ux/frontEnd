@@ -1,6 +1,7 @@
 import { Component } from "react";
 import PersonalInfo   from './PersonalInfo';
 import OfficeInfo from './OfficeInfo';
+import RenderInfo from './RenderInfo';
 
 class Form extends Component {
   constructor() {
@@ -10,6 +11,7 @@ class Form extends Component {
     this.handleStates = this.handleStates.bind(this);
     this.handleOnBlur = this.handleOnBlur.bind(this);
     this.handleOnMouseEnter = this.handleOnMouseEnter.bind(this);
+    this.handleClick = this.handleClick.bind(this);
 
     this.state = {
       name: '',
@@ -18,11 +20,12 @@ class Form extends Component {
       address: '',
       city: '',
       selectOption: '',
-      myState:'',
+      myState:'Acre - AC',
       curriculumSummary:'',
       officePosition:'',
       officeDescription:'',
       setAlert: false,
+      submit: false,
     }
   }
 
@@ -37,8 +40,15 @@ class Form extends Component {
     if (name === "officePosition" && value.length > 40) return;
     if (name === "officeDescription" && value.length > 500) return;
 
+    if(name === "name") {
+      this.setState({
+        [name]: value.toUpperCase(),
+      })
+      return;
+    }
+
     this.setState({
-      [name]: value.toUpperCase(),
+      [name]: value,
     })
   }
 
@@ -72,6 +82,23 @@ class Form extends Component {
     } 
   }
 
+  handleClick() {
+
+    if(this.state.name === '') return;
+    if(this.state.email === '') return;
+    if(this.state.cpf === '') return;
+    if(this.state.address === '') return;
+    if(this.state.city === '') return;
+    if(this.state.curriculumSummary === '') return;
+    if(this.state.officePosition === '') return;
+    if(this.state.officeDescription === '') return;
+
+
+    this.setState({
+      submit: true,
+    })
+  }
+
   render() {
      return(
       <div>
@@ -87,6 +114,8 @@ class Form extends Component {
           handleChange={this.handleChange} 
           handleOnMouseEnter={this.handleOnMouseEnter} 
         />
+        <button onClick={this.handleClick} >Submit</button>
+        { this.state.submit ? <RenderInfo state={this.state} /> : '' }
       </div>
       
      ) 
