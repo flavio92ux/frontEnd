@@ -134,9 +134,8 @@ class Form extends Component {
           handleOnMouseEnter={this.handleOnMouseEnter} 
         />
         <button type="submit" >Submit</button>
-        <input type="reset" onclick={this.handleClear} value="Reset" />
+        <input type="reset" onClick={this.handleClear} value="Reset" />
         { this.state.submit ? <RenderInfo state={this.state} /> : '' }
-        
         
       </form>    
      )      
