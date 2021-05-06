@@ -118,6 +118,11 @@ class Form extends Component {
     }) 
   }
 
+  shouldComponentUpdate() {
+    if (this.state.submit) return false;
+    return true;
+  }
+
   render() {
      return(
       <form id="myForm" onSubmit={this.handleClick} >
